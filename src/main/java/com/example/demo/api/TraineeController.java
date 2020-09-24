@@ -27,4 +27,11 @@ public class TraineeController {
     public List<TraineeDto> getTrainees() {
         return traineeService.getTrainees();
     }
+
+    @DeleteMapping("/{trainee_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTrainee(@PathVariable Long trainee_id) {
+        traineeService.deleteTraineeById(trainee_id);
+    }
+
 }

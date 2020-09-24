@@ -28,4 +28,8 @@ public class TraineeService {
     public List<TraineeDto> getTrainees() {
         return traineeRepository.findAll();
     }
+
+    public void deleteTraineeById(Long id) {
+        traineeRepository.deleteById(id);
+    }
 }
