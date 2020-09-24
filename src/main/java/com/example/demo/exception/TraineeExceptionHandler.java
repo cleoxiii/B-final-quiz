@@ -17,4 +17,10 @@ public class TraineeExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResult.builder().code(HttpStatus.BAD_REQUEST.value()).message(message).build());
     }
+
+    @ExceptionHandler(TraineeNotExistedException.class)
+    public ResponseEntity<ErrorResult> handle(TraineeNotExistedException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ErrorResult.builder().code(HttpStatus.NOT_FOUND.value()).message(exception.getMessage()).build());
+    }
 }

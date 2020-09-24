@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Trainee;
 import com.example.demo.dto.TraineeDto;
+import com.example.demo.exception.TraineeNotExistedException;
 import com.example.demo.repository.TraineeRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,9 @@ public class TraineeService {
     }
 
     public void deleteTraineeById(Long id) {
+        if (!traineeRepository.existsById(id)) {
+            throw new TraineeNotExistedException("学员不存在");
+        }
         traineeRepository.deleteById(id);
     }
 }
