@@ -4,12 +4,15 @@ import com.example.demo.domain.Trainee;
 import com.example.demo.dto.TraineeDto;
 import com.example.demo.service.TraineeService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/trainees")
+@Validated
 public class TraineeController {
     private final TraineeService traineeService;
 
@@ -19,8 +22,8 @@ public class TraineeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTrainee(@RequestBody Trainee trainee) {
-        traineeService.addTrainee(trainee);
+    public TraineeDto addTrainee(@RequestBody @Valid Trainee trainee) {
+        return traineeService.addTrainee(trainee);
     }
 
     @GetMapping

@@ -15,7 +15,7 @@ public class TraineeService {
         this.traineeRepository = traineeRepository;
     }
 
-    public void addTrainee(Trainee trainee) {
+    public TraineeDto addTrainee(Trainee trainee) {
         TraineeDto traineeDto = TraineeDto.builder()
                 .name(trainee.getName())
                 .office(trainee.getOffice())
@@ -23,6 +23,7 @@ public class TraineeService {
                 .zoomId(trainee.getZoomId())
                 .github(trainee.getGithub()).build();
         traineeRepository.save(traineeDto);
+        return traineeDto;
     }
 
     public List<TraineeDto> getTrainees() {
