@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Objects;
 
 @ControllerAdvice
-public class TrainerExceptionHandler {
+public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResult> handle(MethodArgumentNotValidException exception) {
         String message = Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage();
@@ -18,8 +18,8 @@ public class TrainerExceptionHandler {
                 .body(ErrorResult.builder().code(HttpStatus.BAD_REQUEST.value()).message(message).build());
     }
 
-    @ExceptionHandler(TrainerNotExistedException.class)
-    public ResponseEntity<ErrorResult> handle(TrainerNotExistedException exception){
+    @ExceptionHandler({TraineeNotExistedException.class, TrainerNotExistedException.class})
+    public ResponseEntity<ErrorResult> handle(RuntimeException exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ErrorResult.builder().code(HttpStatus.NOT_FOUND.value()).message(exception.getMessage()).build());
     }
